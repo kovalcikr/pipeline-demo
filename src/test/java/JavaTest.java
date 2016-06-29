@@ -1,19 +1,16 @@
-import junit.framework.*;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 public class JavaTest {
-   protected int value1, value2;
-   
-   // assigning the values
-   @Before
-   protected void setUp(){
-      value1=3;
-      value2=3;
-   }
 
-   // test method to add two values
-   @Test
-   public void testAdd(){
-      double result= value1 + value2;
-      assertTrue(result == 6);
-   }
+        @Test
+        public void multiplicationOfZeroIntegersShouldReturnZero() {
+                MyClass tester = new MyClass(); // MyClass is tested
+
+                // assert statements
+                assertEquals("10 x 0 must be 0", 0, tester.multiply(10, 0));
+                assertEquals("0 x 10 must be 0", 0, tester.multiply(0, 10));
+                assertEquals("0 x 0 must be 0", 0, tester.multiply(0, 0));
+        }
 }

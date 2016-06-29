@@ -16,6 +16,6 @@ node {
     def mvnHome = tool name: 'maven-3.3.9', type: 'hudson.tasks.Maven$MavenInstallation'
     env.PATH = "${mvnHome}/bin:${env.PATH}"
     sh 'mvn clean verify -Dmaven.test.failure.ignore'
-    def a step([$class: 'JUnitResultArchiver', keepLongStdio: true, testResults: '**/target/surefire-reports/TEST-*.xml'])
+    def a = step([$class: 'JUnitResultArchiver', keepLongStdio: true, testResults: '**/target/surefire-reports/TEST-*.xml'])
     echo "Status: $a"
 }

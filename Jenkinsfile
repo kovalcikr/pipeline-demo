@@ -3,7 +3,7 @@ echo 'test'
 
 stage 'compile'
 node {
-    git url: 'https://github.com/kovalcikr/pipeline-demo.git'
+    checkout scm
     def mvnHome = tool name: 'maven-3.3.9', type: 'hudson.tasks.Maven$MavenInstallation'
     env.PATH = "${mvnHome}/bin:${env.PATH}"
     sh 'mvn clean verify -DskipTests'
@@ -12,9 +12,9 @@ node {
 
 stage 'test'
 node {
-    git url: 'https://github.com/kovalcikr/pipeline-demo.git'
+    checkout scm
     def mvnHome = tool name: 'maven-3.3.9', type: 'hudson.tasks.Maven$MavenInstallation'
     env.PATH = "${mvnHome}/bin:${env.PATH}"
     sh 'mvn clean verify -Dmaven.test.failure.ignore'
-    step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
+    step([$class: 'JUnitResultArchiver', keepLongStdio: true, testResults: '**/target/surefire-reports/TEST-*.xml'])
 }

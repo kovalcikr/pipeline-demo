@@ -18,9 +18,6 @@ parallel firstBranch: {
         env.PATH = "${mvnHome}/bin:${env.PATH}"
         try {
             sh 'mvn clean verify -fae'
-        } catch (err) {
-            echo "Caught: ${err}"
-            currentBuild.result = 'UNSTABLE'
         } finally {
             step([$class: 'JUnitResultArchiver', keepLongStdio: true, testResults: '**/target/surefire-reports/TEST-*.xml'])
         }
@@ -32,9 +29,6 @@ parallel firstBranch: {
         env.PATH = "${mvnHome}/bin:${env.PATH}"
         try {
             sh 'mvn clean verify -fae'
-        } catch (err) {
-            echo "Caught: ${err}"
-            currentBuild.result = 'UNSTABLE'
         } finally {
             step([$class: 'JUnitResultArchiver', keepLongStdio: true, testResults: '**/target/surefire-reports/TEST-*.xml'])
         }

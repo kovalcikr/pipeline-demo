@@ -1,1 +1,2 @@
+stage 'start'
 echo 'test'

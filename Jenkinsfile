@@ -17,7 +17,7 @@ parallel firstBranch: {
         def mvnHome = tool name: 'maven-3.3.9', type: 'hudson.tasks.Maven$MavenInstallation'
         env.PATH = "${mvnHome}/bin:${env.PATH}"
         try {
-            sh 'mvn clean verify -fae'
+            sh 'mvn clean verify -fn'
         } finally {
             step([$class: 'JUnitResultArchiver', keepLongStdio: true, testResults: '**/target/surefire-reports/TEST-*.xml'])
         }
@@ -28,7 +28,7 @@ parallel firstBranch: {
         def mvnHome = tool name: 'maven-3.3.9', type: 'hudson.tasks.Maven$MavenInstallation'
         env.PATH = "${mvnHome}/bin:${env.PATH}"
         try {
-            sh 'mvn clean verify -fae'
+            sh 'mvn clean verify -fn'
         } finally {
             step([$class: 'JUnitResultArchiver', keepLongStdio: true, testResults: '**/target/surefire-reports/TEST-*.xml'])
         }

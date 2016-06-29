@@ -15,7 +15,12 @@ node {
     checkout scm
     def mvnHome = tool name: 'maven-3.3.9', type: 'hudson.tasks.Maven$MavenInstallation'
     env.PATH = "${mvnHome}/bin:${env.PATH}"
-    sh 'mvn clean verify -Dmaven.test.failure.ignore'
-    def a = step([$class: 'JUnitResultArchiver', keepLongStdio: true, testResults: '**/target/surefire-reports/TEST-*.xml'])
-    echo "Status: $a"
+    try {
+        sh 'mvn clean verify -fae'
+    } catch (err) {
+        echo "Caught: ${err}"
+        currentBuild.result = 'FAILURE'
+    } finally {
+        step([$class: 'JUnitResultArchiver', keepLongStdio: true, testResults: '**/target/surefire-reports/TEST-*.xml'])
+    }
 }

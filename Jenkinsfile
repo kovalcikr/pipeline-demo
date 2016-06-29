@@ -19,7 +19,7 @@ node {
         sh 'mvn clean verify -fae'
     } catch (err) {
         echo "Caught: ${err}"
-        currentBuild.result = 'FAILURE'
+        currentBuild.result = 'UNSTABLE'
     } finally {
         step([$class: 'JUnitResultArchiver', keepLongStdio: true, testResults: '**/target/surefire-reports/TEST-*.xml'])
     }

@@ -35,3 +35,6 @@ parallel firstBranch: {
     }
 },
 failFast: false
+
+stage 'integration tests'
+echo 'integration'
